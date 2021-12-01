@@ -17,3 +17,25 @@ To do this, count the number of times a depth measurement increases from the pre
 In this example, there are 7 measurements that are larger than the previous measurement.
 """
 
+def count_measurements_of_increase(filename: str) -> int:
+    previous = None
+    increased_count = 0
+    with open(filename) as input_report:
+        for value in input_report:
+            value = int(value)
+            # compare the current value to the previous value
+            if previous:
+                if value > previous:
+                    increased_count += 1
+            previous = value
+        return increased_count
+
+def main():
+    filename = 'Q1'
+    answer = count_measurements_of_increase(filename)
+    print(answer)
+
+if __name__ == '__main__':
+    main()
+
+
