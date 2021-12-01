@@ -62,7 +62,7 @@ def count_measurements_of_increase_windows(filename: str) -> int:
             # compare the current value to the previous value
             if len(windows) == 3:
                 current_sum = sum(windows)
-                if previous_sum != None and previous_sum > current_sum:
+                if previous_sum != None and previous_sum < current_sum:
                     increased_count += 1
                 previous_sum = current_sum
             # if the windows does not have enough elements, we do not dequeue an element
