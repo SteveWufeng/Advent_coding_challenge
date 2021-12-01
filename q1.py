@@ -50,7 +50,7 @@ In this example, there are 5 sums that are larger than the previous sum.
 Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
 """
 
-def count_measurements_of_increase_windows(filename: str) -> int:
+def count_measurements_of_increase_windows(filename: str, windows_size=3) -> int:
     previous_sum = None
     increased_count = 0
     windows = []
@@ -60,7 +60,7 @@ def count_measurements_of_increase_windows(filename: str) -> int:
             value = int(value)
             windows.append(value)
             # compare the current value to the previous value
-            if len(windows) == 3:
+            if len(windows) == windows_size:
                 current_sum = sum(windows)
                 if previous_sum != None and previous_sum < current_sum:
                     increased_count += 1
