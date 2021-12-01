@@ -74,7 +74,7 @@ def main():
     answer = count_measurements_of_increase(filename)
     print(answer)
 
-    filename = 'Q1_part2_sample.txt'
+    # filename = 'Q1_part2_sample'
     answer = count_measurements_of_increase_windows(filename)
     print(answer)
 
