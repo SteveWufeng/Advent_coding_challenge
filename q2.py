@@ -34,7 +34,8 @@ def get_final_x_y(filename):
     return x, y
 
 def main():
-    x, y = get_final_x_y('Q2.txt')
+    # x, y = get_final_x_y('Q2.txt')
+    x, y = get_final_x_y('sample.txt')
     print(x*y)
 
 if __name__ == '__main__':
