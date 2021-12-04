@@ -101,7 +101,8 @@ def main():
     # PC_one = PowerConsumption('q3.txt')
     # print(PC_one.get_power_consumption())
 
-    life_support_rating = LifeSupportRating('sample.txt')
+    # life_support_rating = LifeSupportRating('sample.txt')
+    life_support_rating = LifeSupportRating('q3.txt')
     oxygen = life_support_rating.get_oxygen_generator_rating()
     co2 = life_support_rating.get_CO2_scrubber_rating()
     print(oxygen, co2)
