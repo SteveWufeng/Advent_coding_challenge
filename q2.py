@@ -15,7 +15,7 @@ Calculate the horizontal position and depth you would have after following the p
     
 
 
-def get_final_x_y(filename)-> tuple(int, int):
+def get_final_x_y(filename):
     x, y = 0, 0 # initialize cordinate
     with open(filename) as file:
         for line in file:
