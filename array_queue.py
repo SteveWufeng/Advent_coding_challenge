@@ -30,8 +30,8 @@ class Queue:
             string += str (self.__array [i]) + ', '
             i = (i + 1) % len (self.__array)
 
-        return '[' + string [:-2] + ']'
-
+        return string [:-2] 
+        
     def is_empty (self):
         return self.__size == 0
 

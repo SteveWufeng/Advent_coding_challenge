@@ -1,3 +1,6 @@
+from array_queue import Queue
+
+
 class PowerConsumption:
     __slots__ = ['__input', '__track_digit', '__gama_rate', '__epsilon_rate']
     def __init__(self, filename) -> None:
@@ -38,13 +41,64 @@ class PowerConsumption:
 
 class OxygenCO2:
 
-    def __init__(self) -> None:
-        self.track = []
-        
+    def __init__(self, filename) -> None:
+        self.input = filename
+        self.track = Queue()
+        self.index = 0
+
+    def get_oxygen_generator_rating(self):
+        self.__initialize_track()       # refill the track
+        while self.track.size() != 1:   # while the size is down to one
+            self.__filter(self.index, 'more')
+            self.index += 1
+        return repr(self.track)
+    
+    def get_CO2_scrubber_rating(self):
+        self.__initialize_track()       # refill the track
+        while self.track.size() != 1:   # while the size is down to one
+            self.__filter(self.index, 'less')
+            self.index += 1
+        return repr(self.track)
+    
+    def __initialize_track(self):
+        self.track = Queue()            # reset Queue
+        with open(self.input) as file:
+            for line in file:
+                self.track.enqueue(line)# add item to Queue
+    
+    def __ones_or_zeros(self, digit, comparator):
+        ones_count = 0
+        line_count = self.track.size()
+        for _ in range(line_count):
+            binary = self.track.dequeue()   # take one binary out
+            if binary[digit] == '1':
+                ones_count += 1             # count the ones in that digit
+            self.track.enqueue(binary)      # put the binary back in
+        zeros_count = line_count - ones_count
+
+        if comparator == 'more':
+            if zeros_count > ones_count:
+                return '0'
+            elif ones_count >= zeros_count:
+                return '1'
+        else:
+            if zeros_count <= ones_count:
+                return '0'
+            elif ones_count < zeros_count:
+                return '1'
+
+    def __filter(self, digit, comparator):
+        most_count = self.__ones_or_zeros(digit, comparator)
+        for _ in range(self.track.size()):
+            binary = self.track.dequeue()   # take one binary out
+            if binary[digit] == most_count:
+                self.track.enqueue(binary)  # put the binary to the back if they are what we want.
+
 def main():
     # PC_one = PowerConsumption('sample.txt')
-    PC_one = PowerConsumption('q3.txt')
-    print(PC_one.get_power_consumption())
+    # PC_one = PowerConsumption('q3.txt')
+    # print(PC_one.get_power_consumption())
+    pass
 
 if __name__ == '__main__':
     main()
