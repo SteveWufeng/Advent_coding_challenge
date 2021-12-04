@@ -64,7 +64,8 @@ def main():
     # x, y = get_final_x_y('Q2.txt')
     # x, y = get_final_x_y('sample.txt')
 
-    x, y = advanced_find_x_y('sample.txt')
+    # x, y = advanced_find_x_y('sample.txt')
+    x, y = advanced_find_x_y('Q2.txt')
     print(x, y)
     print(x*y)
 
