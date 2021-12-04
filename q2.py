@@ -28,14 +28,44 @@ def get_final_x_y(filename):
             if direction == 'forward':
                 x += move_value
             elif direction == 'down':
-                y -= move_value
-            else:
                 y += move_value
+            else:
+                y -= move_value
     return x, y
+
+"""
+new algorithm for part 2
+down X increases your aim by X units.
+up X decreases your aim by X units.
+forward X does two things:
+It increases your horizontal position by X units.
+It increases your depth by your aim multiplied by X.
+"""
+def advanced_find_x_y(filename):
+    x, y, aim= 0, 0, 0# initialize cordinate
+    with open(filename) as file:
+        for line in file:
+            command = line.split()
+            # analyse command
+            direction = command[0].lower()
+            move_value = int(command[1])
+
+            # perform command action [advanced]
+            if direction == 'forward':
+                x += move_value
+                y += aim * move_value
+            elif direction == 'down':
+                aim += move_value
+            else:
+                aim -= move_value
+    return x, y   
 
 def main():
     # x, y = get_final_x_y('Q2.txt')
-    x, y = get_final_x_y('sample.txt')
+    # x, y = get_final_x_y('sample.txt')
+
+    x, y = advanced_find_x_y('sample.txt')
+    print(x, y)
     print(x*y)
 
 if __name__ == '__main__':
