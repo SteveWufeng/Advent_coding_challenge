@@ -39,7 +39,8 @@ class PowerConsumption:
 
 
 def main():
-    PC_one = PowerConsumption('sample.txt')
+    # PC_one = PowerConsumption('sample.txt')
+    PC_one = PowerConsumption('q3.txt')
     print(PC_one.get_power_consumption())
 
 if __name__ == '__main__':
