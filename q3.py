@@ -35,9 +35,12 @@ class PowerConsumption:
                 gamma_rate += '0'
                 epsilon_rate += '1'
         return gamma_rate, epsilon_rate
-            
 
+class OxygenCO2:
 
+    def __init__(self) -> None:
+        self.track = []
+        
 def main():
     # PC_one = PowerConsumption('sample.txt')
     PC_one = PowerConsumption('q3.txt')
