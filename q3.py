@@ -39,7 +39,7 @@ class PowerConsumption:
                 epsilon_rate += '1'
         return gamma_rate, epsilon_rate
 
-class OxygenCO2:
+class LifeSupportRating:
 
     def __init__(self, filename) -> None:
         self.input = filename
@@ -48,6 +48,7 @@ class OxygenCO2:
 
     def get_oxygen_generator_rating(self):
         self.__initialize_track()       # refill the track
+        self.index = 0                  # reset index
         while self.track.size() != 1:   # while the size is down to one
             self.__filter(self.index, 'more')
             self.index += 1
@@ -55,6 +56,7 @@ class OxygenCO2:
     
     def get_CO2_scrubber_rating(self):
         self.__initialize_track()       # refill the track
+        self.index = 0                  # reset index
         while self.track.size() != 1:   # while the size is down to one
             self.__filter(self.index, 'less')
             self.index += 1
@@ -70,7 +72,7 @@ class OxygenCO2:
         ones_count = 0
         line_count = self.track.size()
         for _ in range(line_count):
-            binary = self.track.dequeue()   # take one binary out
+            binary = self.track.dequeue().strip()   # take one binary out
             if binary[digit] == '1':
                 ones_count += 1             # count the ones in that digit
             self.track.enqueue(binary)      # put the binary back in
@@ -98,7 +100,14 @@ def main():
     # PC_one = PowerConsumption('sample.txt')
     # PC_one = PowerConsumption('q3.txt')
     # print(PC_one.get_power_consumption())
-    pass
+
+    life_support_rating = LifeSupportRating('sample.txt')
+    oxygen = life_support_rating.get_oxygen_generator_rating()
+    co2 = life_support_rating.get_CO2_scrubber_rating()
+    print(oxygen, co2)
+    oxygen = int(oxygen, 2)
+    co2 = int(co2, 2)
+    print(oxygen * co2)
 
 if __name__ == '__main__':
     main()
