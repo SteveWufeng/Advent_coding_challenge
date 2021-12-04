@@ -16,10 +16,10 @@ class PowerConsumption:
                 line_count += 1
                 for digit in range(len(binary)):
                     # initialize the tracking board
-                    if digit not in self.__track_digit:
+                    if digit not in self.__track_digit and (len(self.__track_digit) < len(binary)-1):
                         self.__track_digit[digit] = 0
                     # check if the value on the digit is one
-                    if binary[digit] == 1:
+                    if binary[digit] == '1':
                         self.__track_digit[digit] += 1   # add 1 if yes
         # now that we have counted all 1s in the each column
         # we can now generate gamma
@@ -39,7 +39,7 @@ class PowerConsumption:
 
 
 def main():
-    PC_one = PowerConsumption('q3.txt')
+    PC_one = PowerConsumption('sample.txt')
     print(PC_one.get_power_consumption())
 
 if __name__ == '__main__':
