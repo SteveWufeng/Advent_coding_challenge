@@ -69,7 +69,7 @@ def run_draw(tracker: list, rank: list):
 def main():
     rank = []
     tracker = list()
-    initialize_bingo('Q4.txt', tracker)
+    initialize_bingo('sample.txt', tracker)
     while rank == []:
         run_draw(tracker, rank)
     print('table:', rank[0])
