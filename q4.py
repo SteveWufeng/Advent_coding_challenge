@@ -56,6 +56,7 @@ def initialize_bingo(filename, tracker: list):
                 table = []                  # reset and start a new table if the line is empty
             else:
                 table.append(line)          # else just store the row to the current table.
+    tracker.append(Board(table, draws))     # get the very last table
 
 def run_draw(tracker: list, rank: list):
     for i in range(len(tracker)):
@@ -72,7 +73,7 @@ def main():
     initialize_bingo('sample.txt', tracker)
     while rank == []:
         run_draw(tracker, rank)
-    print('table:', rank[0])
+    print('table:', rank[0]+1)
     for row in tracker[rank[0]].board:
         print(row)
     print()
