@@ -47,11 +47,12 @@ def initialize_bingo(filename, tracker: list):
     table = []
     with open(filename) as file:
         draws = next(file)  # skip header
+        draws = draws.split(',')
         next(file)  # skip empty line
         for line in file:
             line = line.split()
             if line == []:
-                tracker.append(Board(table), draws)# store the table to the tracker
+                tracker.append(Board(table, draws))# store the table to the tracker
                 table = []                  # reset and start a new table if the line is empty
             else:
                 table.append(line)          # else just store the row to the current table.
@@ -71,4 +72,11 @@ def main():
     initialize_bingo('Q4.txt', tracker)
     while rank == []:
         run_draw(tracker, rank)
+    print('table:', rank[0])
+    for row in tracker[rank[0]].board:
+        print(row)
+    print()
+    print(tracker[rank[0]].marked)
 
+if __name__ == '__main__':
+    main()
