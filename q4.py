@@ -1,6 +1,5 @@
 
 class Board:
-    
     def __init__(self, table, draws) -> None:
         self.board = table
         self.draws = draws
@@ -41,7 +40,15 @@ class Board:
             if draw_val in row:
                 self.marked.append(draw_val)
                 return
-        
+    
+    def sum_all_unmarked_numbers(self):
+        sum = 0
+        for row in range(len(self.board)):
+            for col in range(len(self.board[row])):
+                value = self.board[row][col]
+                if value not in self.marked:
+                    sum += int(value)
+        return sum * int(self.marked[-1])
 
 def initialize_bingo(filename, tracker: list):
     table = []
@@ -65,19 +72,23 @@ def run_draw(tracker: list, rank: list):
         bingo = table.check_bingo()
         if bingo and (not (i in rank)):
             rank.append(i)
-        
 
 def main():
     rank = []
     tracker = list()
     initialize_bingo('sample.txt', tracker)
+    # initialize_bingo('Q4.txt', tracker)
     while rank == []:
         run_draw(tracker, rank)
-    print('table:', rank[0]+1)
+    print('table:', rank[0])
     for row in tracker[rank[0]].board:
         print(row)
     print()
     print(tracker[rank[0]].marked)
+
+    # get answer
+    print()
+    print(tracker[rank[0]].sum_all_unmarked_numbers())
 
 if __name__ == '__main__':
     main()
