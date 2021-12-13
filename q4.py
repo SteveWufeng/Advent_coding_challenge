@@ -78,18 +78,30 @@ def main():
     tracker = list()
     # initialize_bingo('sample.txt', tracker)
     initialize_bingo('Q4.txt', tracker)
-    while rank == []:
+    while len(rank) != len(tracker):
         run_draw(tracker, rank)
 
-    print('table:', rank[0])
-    for row in tracker[rank[0]].board:
+    """problem 1 -- find first win"""
+    # print('table:', rank[0])
+    # for row in tracker[rank[0]].board:
+    #     print(row)
+    # print()
+    # print(tracker[rank[0]].marked)
+
+    # # get answer
+    # print()
+    # print(tracker[rank[0]].sum_all_unmarked_numbers())
+
+    """problem 2 -- find last win"""
+    print('table:', rank[-1])
+    for row in tracker[rank[-1]].board:
         print(row)
     print()
-    print(tracker[rank[0]].marked)
+    print(tracker[rank[-1]].marked)
 
     # get answer
     print()
-    print(tracker[rank[0]].sum_all_unmarked_numbers())
+    print(tracker[rank[-1]].sum_all_unmarked_numbers())
 
 if __name__ == '__main__':
     main()
