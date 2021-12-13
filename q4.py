@@ -24,7 +24,7 @@ class Board:
         # check verticle
         for i in range(len(self.board[0])):
             for j in range(len(self.board)):
-                if self.board[i][j] not in self.marked:
+                if self.board[j][i] not in self.marked:
                     break
                 if j == len(self.board)-1:
                     self.bingo = True
@@ -48,7 +48,7 @@ class Board:
                 value = self.board[row][col]
                 if value not in self.marked:
                     sum += int(value)
-        return sum * int(self.marked[-1])
+        return sum * int(self.draws[self.index-1])
 
 def initialize_bingo(filename, tracker: list):
     table = []
@@ -76,10 +76,11 @@ def run_draw(tracker: list, rank: list):
 def main():
     rank = []
     tracker = list()
-    initialize_bingo('sample.txt', tracker)
-    # initialize_bingo('Q4.txt', tracker)
+    # initialize_bingo('sample.txt', tracker)
+    initialize_bingo('Q4.txt', tracker)
     while rank == []:
         run_draw(tracker, rank)
+
     print('table:', rank[0])
     for row in tracker[rank[0]].board:
         print(row)
