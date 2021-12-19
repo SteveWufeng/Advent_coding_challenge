@@ -2,7 +2,6 @@
 
 def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
     """return a list of cordinate from point 1 to point2""" 
-    x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
     change_y = False
     change_x = False
     # check which one is changing
@@ -17,7 +16,7 @@ def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
     # start adding the cordinates
     set_of_cord = set()
     # check which one is bigger
-    if changing[0] < changing[1]:
+    if changing[0] > changing[1]:
         changing[0], changing[1] = changing[1], changing[0]
     # add the cordinates
     for i in range(changing[0], changing[1]+1):
@@ -52,6 +51,7 @@ def extract_file(filename:str) -> dict:
 
             point2 = line[1]
             point2 = point2.split(',')
+            point1[0], point1[1], point2[0], point2[1] = int(point1[0]), int(point1[1]), int(point2[0]), int(point2[1])
             set_cords = read_cordinate_only_horizontal_vertical(point1[0], point1[1], point2[0], point2[1])
             if set_cords:
                 for point in set_cords:
