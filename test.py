@@ -1,15 +1,14 @@
-import re
+import pyautogui
+import time
+import random
 
-string1 = 'abc1234@rit.edu'
-string2 = 'ab1234@rit.edu'
-string3 = 'ab1234@g.rit.edu'
-string4 = 'ab1234@grit.edu'
+time.sleep(2)
 
-def myfunc(string):
-    x = re.findall('[a-zA-Z]{2}[a-zA-z]?\d{4}@rit.edu', string)
-    print(x)
-
-myfunc(string1)
-myfunc(string2)
-myfunc(string3)
-myfunc(string4)
+for i in range(36):
+    print('run')
+    # pyautogui.press('num2')
+    pyautogui.press('num2')
+    time.sleep(random.randint(20,32))
+    pyautogui.press('num2')
+    wait = random.randint(30,60)
+    time.sleep(wait)
