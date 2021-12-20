@@ -1,5 +1,8 @@
 
 
+from os import X_OK
+
+
 def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
     """return a list of cordinate from point 1 to point2""" 
     change_y = False
@@ -25,6 +28,36 @@ def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
         elif change_y:
             set_of_cord.add((x1, i))
     return set_of_cord
+
+def read_cordinate_all(x1, y1, x2, y2) -> set:
+    """return a list of cordinate from point 1 to point2""" 
+    # start adding the cordinates
+    set_of_cord = set()
+    x_decreasing = False
+    y_decreasing = False
+
+    # check decreasing
+    if x1 > x2:
+        x_decreasing = True
+        x2 -= 2
+    if y1 > y2:
+        y_decreasing = True
+        y2 -= 2
+
+    # add the cordinates
+    while x1 != x2+1 and y1 != y2+1:
+        set_of_cord.add((x1, y1))
+        if x_decreasing:
+            x1 -= 1
+        else:
+            x1 += 1
+        if y_decreasing:
+            y1 -= 1
+        else:
+            y1 += 1
+
+    return set_of_cord
+
 
 def mark_cordinate(x:int, y:int, grid:dict) -> None:
     """this funciton mark the cordinate on the grid"""
@@ -52,7 +85,8 @@ def extract_file(filename:str) -> dict:
             point2 = line[1]
             point2 = point2.split(',')
             point1[0], point1[1], point2[0], point2[1] = int(point1[0]), int(point1[1]), int(point2[0]), int(point2[1])
-            set_cords = read_cordinate_only_horizontal_vertical(point1[0], point1[1], point2[0], point2[1])
+            # set_cords = read_cordinate_only_horizontal_vertical(point1[0], point1[1], point2[0], point2[1])
+            set_cords = read_cordinate_all(point1[0], point1[1], point2[0], point2[1])
             if set_cords:
                 for point in set_cords:
                     mark_cordinate(point[0], point[1], grid)
@@ -60,6 +94,7 @@ def extract_file(filename:str) -> dict:
             
 def main():
     grid = extract_file('sample.txt')
+    # grid = extract_file('q5.txt')
     answer = get_points_overlaps(grid)
     print(answer)
 
