@@ -69,7 +69,6 @@ def extract_file(filename:str) -> dict:
             point2 = line[1]
             point2 = point2.split(',')
             point1[0], point1[1], point2[0], point2[1] = int(point1[0]), int(point1[1]), int(point2[0]), int(point2[1])
-            # set_cords = read_cordinate_only_horizontal_vertical(point1[0], point1[1], point2[0], point2[1])
             set_cords = read_cordinate_all(point1[0], point1[1], point2[0], point2[1])
             if set_cords:
                 for point in set_cords:
