@@ -1,9 +1,5 @@
 
-
-from os import X_OK
-
-
-def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
+def read_cordinate_all(x1, y1, x2, y2) -> set:
     """return a list of cordinate from point 1 to point2""" 
     change_y = False
     change_x = False
@@ -15,7 +11,7 @@ def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
         changing = [x1, x2]
         change_x = True
     else:
-        return
+        return diagonal_set_of_cord(x1, y1, x2, y2) # run another function if the two cordinates are diagonal
     # start adding the cordinates
     set_of_cord = set()
     # check which one is bigger
@@ -29,35 +25,23 @@ def read_cordinate_only_horizontal_vertical(x1, y1, x2, y2) -> set:
             set_of_cord.add((x1, i))
     return set_of_cord
 
-def read_cordinate_all(x1, y1, x2, y2) -> set:
-    """return a list of cordinate from point 1 to point2""" 
-    # start adding the cordinates
+def diagonal_set_of_cord(x1, y1, x2, y2) -> set:
+    # determine x and y are increasing or not.
+    x_increasing = 1    # 1 means that it is increasing
+    y_increasing = 1    # -1 means that it is decreasing
+    if x2 < x1:
+        x_increasing = -1
+        x2 -=2
+    if y2 < y1:
+        y_increasing = -1
+        y2 -=2
+    # create cordinate sets
     set_of_cord = set()
-    x_decreasing = False
-    y_decreasing = False
-
-    # check decreasing
-    if x1 > x2:
-        x_decreasing = True
-        x2 -= 2
-    if y1 > y2:
-        y_decreasing = True
-        y2 -= 2
-
-    # add the cordinates
-    while x1 != x2+1 and y1 != y2+1:
-        set_of_cord.add((x1, y1))
-        if x_decreasing:
-            x1 -= 1
-        else:
-            x1 += 1
-        if y_decreasing:
-            y1 -= 1
-        else:
-            y1 += 1
-
+    x_val = [i for i in range(x1, x2+1, x_increasing)]
+    y_val = [j for j in range(y1, y2+1, y_increasing)]
+    for k in range(len(x_val)):
+        set_of_cord.add((x_val[k], y_val[k]))
     return set_of_cord
-
 
 def mark_cordinate(x:int, y:int, grid:dict) -> None:
     """this funciton mark the cordinate on the grid"""
@@ -93,8 +77,8 @@ def extract_file(filename:str) -> dict:
     return grid
             
 def main():
-    grid = extract_file('sample.txt')
-    # grid = extract_file('q5.txt')
+    # grid = extract_file('sample.txt')
+    grid = extract_file('q5.txt')
     answer = get_points_overlaps(grid)
     print(answer)
 
