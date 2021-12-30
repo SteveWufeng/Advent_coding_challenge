@@ -27,6 +27,14 @@ class Pool:
         # update day passed
         self.__day_past += 1
 
+    def count_fish(self) -> int:
+        """this funciton is for reading all the fishes in the pool"""
+        count = 0
+        for key in self.__fishes:
+            count += self.__fishes[key]
+
+        return count
+
 def read_file(filename) -> Pool:
     with open(filename) as file:
         # read the first line
@@ -43,3 +51,5 @@ def main():
     # filename = 'q6.txt'
     pool = read_file(filename)
     
+if __name__ == '__main__':
+    main()
