@@ -1,4 +1,4 @@
-class pool:
+class Pool:
     __slots__ = ['__fishes', '__day_past']
     def __init__(self) -> None:
         self.__fishes = dict()
@@ -22,4 +22,24 @@ class pool:
                 # add a new gen of fishes
                 new_fishes[8] = self.__fishes[0]
             else:
-                
+                # reduce fishes cycle by one
+                new_fishes[cycle-1] = self.__fishes[cycle]
+        # update day passed
+        self.__day_past += 1
+
+def read_file(filename) -> Pool:
+    with open(filename) as file:
+        # read the first line
+        line = next(file)
+        # split the first line in commas
+        line = line.split(',')
+        new_pool = Pool()
+        for fish in line:
+            new_pool.add_fish(int(fish))
+        return new_pool
+
+def main():
+    filename = 'sample.txt'
+    # filename = 'q6.txt'
+    pool = read_file(filename)
+    
