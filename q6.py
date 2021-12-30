@@ -13,18 +13,24 @@ class Pool:
         self.__fishes[state] += 1
     
     def past_one_day(self):
+        # create a new pool
         new_fishes = dict()
+        # initialize the new pool
+        for cycle in range(0, 9):
+            new_fishes[cycle] = 0
+
         for cycle in self.__fishes:
             # if the cycle is at 0
             if cycle == 0:
                 # reset these 
-                new_fishes[6] = self.__fishes[0]
+                new_fishes[6] += self.__fishes[0]
                 # add a new gen of fishes
-                new_fishes[8] = self.__fishes[0]
+                new_fishes[8] += self.__fishes[0]
             else:
                 # reduce fishes cycle by one
-                new_fishes[cycle-1] = self.__fishes[cycle]
-        # update day passed
+                new_fishes[cycle-1] += self.__fishes[cycle]
+        # update day passed & current pool
+        self.__fishes = new_fishes
         self.__day_past += 1
 
     def count_fish(self) -> int:
@@ -47,9 +53,13 @@ def read_file(filename) -> Pool:
         return new_pool
 
 def main():
-    filename = 'sample.txt'
-    # filename = 'q6.txt'
+    # filename = 'sample.txt'
+    filename = 'q6.txt'
     pool = read_file(filename)
-    
+    for _ in range(80):
+        pool.past_one_day()
+    count = pool.count_fish()
+    print(count)
+
 if __name__ == '__main__':
     main()
