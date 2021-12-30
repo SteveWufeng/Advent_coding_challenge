@@ -56,7 +56,7 @@ def main():
     # filename = 'sample.txt'
     filename = 'q6.txt'
     pool = read_file(filename)
-    for _ in range(80):
+    for _ in range(256):
         pool.past_one_day()
     count = pool.count_fish()
     print(count)
